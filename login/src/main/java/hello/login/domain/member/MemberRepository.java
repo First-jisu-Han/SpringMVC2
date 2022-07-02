@@ -18,8 +18,8 @@ public class MemberRepository {
         return member;
     }
  // null이 올 수 있기 때문에 Optional 로 감싼다.
-    public Optional<Member> findByLoginId(String loginId){
-        List<Member> all =findAll();
+    public Optional<Member> findByLoginId(String loginId) {
+     /*   List<Member> all =findAll();
         for(Member member : all){
             if(member.getLoginId().equals(loginId)){
                 return Optional.of(member);
@@ -27,8 +27,12 @@ public class MemberRepository {
         }
             return Optional.empty(); // 아이디가 없는경우 null
 
+    }  */
+        // 람다 식 변형
+        return findAll().stream() // 루프 돈다
+        .filter(member->member.getLoginId().equals(loginId)) // Member 타입 멤버 찾아서 로그인 아이디 일치하면 그 값반환시키기
+                .findFirst();
     }
-
     public Member findById(Long id){
         return store.get(id);
     }
