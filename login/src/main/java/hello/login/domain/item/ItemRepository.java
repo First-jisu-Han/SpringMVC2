@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository
+@Repository // DB가 없는 상태이기에 Map<>으로 임의의 저장소를 만듦
 public class ItemRepository {
 
-    private static final Map<Long, Item> store = new HashMap<>(); //static - 저장소 역할
-    private static long sequence = 0L; //static
+    private static final Map<Long, Item> store = new HashMap<>(); // 싱글톤
+    private static long sequence = 0L; // 상품 고유 번호
 
     public Item save(Item item) {
         item.setId(++sequence);

@@ -59,7 +59,7 @@ public class ItemController {
             return "items/addForm";
         }
 
-        // 아이템 추가 성공
+        // 아이템 추가 하기 성공
         Item item = new Item();
         item.setItemName(form.getItemName());
         item.setPrice(form.getPrice());
