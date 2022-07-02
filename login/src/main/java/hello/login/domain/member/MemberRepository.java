@@ -31,7 +31,7 @@ public class MemberRepository {
         // 람다 식 변형
         return findAll().stream() // 루프 돈다
         .filter(member->member.getLoginId().equals(loginId)) // Member 타입 멤버 찾아서 로그인 아이디 일치하면 그 값반환시키기
-                .findFirst();
+                .findFirst(); // 제일 먼저 나오는 데이터 반환
     }
     public Member findById(Long id){
         return store.get(id);
