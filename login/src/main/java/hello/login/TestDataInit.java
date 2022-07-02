@@ -2,6 +2,8 @@ package hello.login;
 
 import hello.login.domain.item.Item;
 import hello.login.domain.item.ItemRepository;
+import hello.login.domain.member.Member;
+import hello.login.domain.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,7 @@ import javax.annotation.PostConstruct;
 public class TestDataInit {
 
     private final ItemRepository itemRepository;
+    private final MemberRepository memberRepository;
 
     /**
      * 테스트용 데이터 추가
@@ -20,6 +23,11 @@ public class TestDataInit {
     public void init() {
         itemRepository.save(new Item("itemA", 10000, 10));
         itemRepository.save(new Item("itemB", 20000, 20));
+        Member member=new Member();
+        member.setLoginId("jisu");
+        member.setPassword("han");
+        member.setName("한지수");
+        memberRepository.save(member); // sequence--> 즉 member id는 어짜피 save 시 자동으로 전역으로 부여됨.
     }
 
 }

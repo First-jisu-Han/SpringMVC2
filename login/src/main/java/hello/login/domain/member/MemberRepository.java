@@ -15,6 +15,7 @@ public class MemberRepository {
     public Member save(Member member){
         member.setId(++sequence);
         store.put(member.getId(),member);
+        log.info("{}",member);
         return member;
     }
  // null이 올 수 있기 때문에 Optional 로 감싼다.
@@ -32,6 +33,9 @@ public class MemberRepository {
         return findAll().stream() // 루프 돈다
         .filter(member->member.getLoginId().equals(loginId)) // Member 타입 멤버 찾아서 로그인 아이디 일치하면 그 값반환시키기
                 .findFirst(); // 제일 먼저 나오는 데이터 반환
+    }
+    public void storeClear(){
+        store.clear();  // Map 안 요소 모두 삭제
     }
     public Member findById(Long id){
         return store.get(id);
