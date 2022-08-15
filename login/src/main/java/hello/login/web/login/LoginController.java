@@ -28,7 +28,7 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute LoginForm form , BindingResult bindingResult){
+    public String login(@Valid @ModelAttribute LoginForm form , BindingResult bindingResult,HttpServletResponse response){
         if(bindingResult.hasErrors()){
             return "login/loginForm";
         }
@@ -37,8 +37,10 @@ public class LoginController {
             bindingResult.reject("loginFail","아이디또는 비밀번호가 틀립니다.");
             return "login/loginForm";
         }
-        // 로그인 성공
 
+        // 로그인 성공 - 세션 쿠키 -> 브라우저를 닫으면 종료 되도록
+        Cookie idCookie = new Cookie("memberId", String.valueOf(loginMember.getId()));
+        response.addCookie(idCookie);
         return "redirect:/";
     }
 
