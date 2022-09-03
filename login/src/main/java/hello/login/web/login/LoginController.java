@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.net.http.HttpResponse;
 
 @Controller
 @RequiredArgsConstructor
@@ -51,4 +49,5 @@ public class LoginController {
         response.addCookie(cookie); // 쿠키 소멸
         return "redirect:/";
     }
+
 }
