@@ -54,6 +54,7 @@ public class SessionManager {
         return sessionStore.get(sessionCookie.getValue());
     }
 
+    // 리펙터링된 코드 - 재활용 용도
     public Cookie findCookie(HttpServletRequest request,String cookieName){
         if(request.getCookies()==null){
             return null;
@@ -70,7 +71,10 @@ public class SessionManager {
      * 세션 만료
      */
     public void expire(HttpServletRequest request){
-
+        Cookie sessionCookie = findCookie(request,SESSION_COOKIE_NAME);
+        if(sessionCookie!=null){
+            sessionStore.remove(sessionCookie.getValue());
+        }
     }
 
 }
