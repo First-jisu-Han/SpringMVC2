@@ -33,4 +33,20 @@ public class SessionManager {
         response.addCookie(mySessionCookie);
     }
 
+    /**
+     * 세션 조회
+     */
+    public Object getSession(HttpServletRequest request ){
+        Cookie[] cookies = request.getCookies();
+        if(cookies==null){
+            return null;
+        }
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals(SESSION_COOKIE_NAME)){
+                return sessionStore.get(cookie.getValue());
+            }
+        }
+        return null;
+    }
+
 }
