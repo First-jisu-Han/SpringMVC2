@@ -1,20 +1,17 @@
 package hello.login.web;
 
 import hello.login.domain.member.Member;
-import hello.login.web.session.SessionManager;
+import hello.login.web.session.SessionManagerImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import javax.servlet.http.HttpServletResponse;
-
 public class SessionManagerTest {
 
     @Autowired
-    SessionManager sessionManager;
+    SessionManagerImpl sessionManager;
 
 
     @Test

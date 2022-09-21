@@ -1,25 +1,18 @@
 package hello.login.web.login;
 
 import hello.login.domain.login.LoginService;
-import hello.login.domain.member.Member;
-import hello.login.web.session.SessionManager;
+import hello.login.web.session.SessionManagerImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
 public class LoginController {
 
     private final LoginService loginService;
-    private final SessionManager sessionManager;
+    private final SessionManagerImpl sessionManager;
 
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm loginForm){
