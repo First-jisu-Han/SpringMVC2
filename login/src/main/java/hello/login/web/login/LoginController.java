@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -23,9 +24,8 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm(@ModelAttribute("loginForm") LoginForm loginForm){
-        return "login/LoginForm";
+        return "login/loginForm";
     }
-
 
 //    @PostMapping("/login")
 //    public String login(@Valid @ModelAttribute LoginForm form , BindingResult bindingResult,HttpServletResponse response){
@@ -43,6 +43,7 @@ public class LoginController {
 //        response.addCookie(idCookie);
 //        return "redirect:/";
 //    }
+
 //
 //    @PostMapping("/logout")
 //    public String logout(HttpServletResponse response){
@@ -51,5 +52,10 @@ public class LoginController {
 //        response.addCookie(cookie); // 쿠키 소멸
 //        return "redirect:/";
 //    }
+    @PostMapping("/logout")
+    public String logOutV2(HttpServletRequest request){
+        sessionManager.expire(request); // session expired
+        return "redirect:/";
+    }
 
 }

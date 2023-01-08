@@ -41,7 +41,7 @@ public class MemberRepository {
         return store.get(id);
     }
     public List<Member> findAll(){
-        return new ArrayList<>(store.values());
+        return new ArrayList<>(store.values()); // map의 모든 값들이 변환 --> store 맵의 Value인  Member들 모두 List로 변환
     }
 
 }
