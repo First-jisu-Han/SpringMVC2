@@ -39,7 +39,6 @@ public class LoginController {
             bindingResult.reject("loginFail","아이디또는 비밀번호가 틀립니다.");
             return "login/loginForm";
         }
-
         // 로그인 성공 - 세션 생성
         sessionManager.createSession(loginMember,response);
         return "redirect:/";

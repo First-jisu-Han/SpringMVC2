@@ -37,11 +37,13 @@ public class SessionManagerImpl implements SessionManager {
      */
     @Override
     public Object getSession(HttpServletRequest request){
+        // 해당 쿠키 가져옴
         Cookie sessionCookie=findCookie(request,SESSION_COOKIE_NAME);
         if(sessionCookie==null){
             return null;
         }
-        return sessionStore.get(sessionCookie.getValue()); // disdjif222xx 토큰 값으로 나올 것
+        // 해당 쿠키의 Value값을 조회
+        return sessionStore.get(sessionCookie.getValue()); // disdjif222xx 토큰 값으로 나온 후 , "세션 저장소" 에서 해당 UUID에 대한 Member 반환
     }
 
     // 리펙터링된 코드 - 재활용 용도
