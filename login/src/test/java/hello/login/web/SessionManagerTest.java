@@ -13,8 +13,6 @@ public class SessionManagerTest {
 
     SessionManager sessionManager= new SessionManagerImpl();
 
-
-
     @Test
     void sessionTest() {
 

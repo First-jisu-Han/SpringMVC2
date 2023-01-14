@@ -27,7 +27,31 @@ public class LoginController {
         return "login/LoginForm";
     }
 
+    @PostMapping("/login")
+    public String loginV2(@Valid @ModelAttribute LoginForm form , BindingResult bindingResult,HttpServletResponse response){
+        if(bindingResult.hasErrors()){
+            return "login/loginForm";
+        }
+        // null 이 나오거나 Member객체가 나오거나
+        Member loginMember=loginService.login(form.getLoginId(),form.getPassword());
 
+        if(loginMember==null){
+            bindingResult.reject("loginFail","아이디또는 비밀번호가 틀립니다.");
+            return "login/loginForm";
+        }
+
+        // 로그인 성공 - 세션 생성
+        sessionManager.createSession(loginMember,response);
+        return "redirect:/";
+    }
+    @PostMapping("/logout")
+    public String logoutV2(HttpServletRequest request){
+        sessionManager.expire(request);
+        return "redirect:/";
+    }
+
+
+    /*
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute LoginForm form , BindingResult bindingResult,HttpServletResponse response){
         if(bindingResult.hasErrors()){
@@ -44,6 +68,7 @@ public class LoginController {
         response.addCookie(idCookie);
         return "redirect:/";
     }
+     */
 
 //    @PostMapping("/logout")
 //    public String logout(HttpServletResponse response){
@@ -52,10 +77,5 @@ public class LoginController {
 //        response.addCookie(cookie); // 쿠키 소멸
 //        return "redirect:/";
 //    }
-    @PostMapping("/logout")
-    public String logoutV2(HttpServletRequest request){
-        sessionManager.expire(request);
-        return "redirect:/";
-    }
 
 }

@@ -2,7 +2,6 @@ package hello.login.web.session;
 
 
 import org.springframework.stereotype.Component;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +24,8 @@ public class SessionManagerImpl implements SessionManager {
      */
      @Override
      public void createSession(Object value, HttpServletResponse response){
-
         // session id 생성 , 값을 세션에 저장
-        String sessionId= UUID.randomUUID().toString();
+        String sessionId=UUID.randomUUID().toString();
         sessionStore.put(sessionId,value);
 
         Cookie mySessionCookie= new Cookie(SESSION_COOKIE_NAME,sessionId);
@@ -38,20 +36,22 @@ public class SessionManagerImpl implements SessionManager {
      * 세션 조회
      */
     @Override
-    public Object getSession(HttpServletRequest request ){
+    public Object getSession(HttpServletRequest request){
         Cookie sessionCookie=findCookie(request,SESSION_COOKIE_NAME);
         if(sessionCookie==null){
             return null;
         }
-        return sessionStore.get(sessionCookie.getValue());
+        return sessionStore.get(sessionCookie.getValue()); // disdjif222xx 토큰 값으로 나올 것
     }
 
     // 리펙터링된 코드 - 재활용 용도
     @Override
     public Cookie findCookie(HttpServletRequest request,String cookieName){
-        if(request.getCookies()==null){
+
+        if(request.getCookies()==null) {
             return null;
         }
+
         return Arrays.stream(request.getCookies())
                 .filter(cookie->cookie.getName().equals(cookieName))
                 .findAny()
@@ -69,7 +69,7 @@ public class SessionManagerImpl implements SessionManager {
         if(sessionCookie!=null){
             sessionStore.remove(sessionCookie.getValue());
         } else {
-            System.out.println("세션 쿠키 정상 소멸 X" );
+            System.out.println("세션 쿠키 정상 소멸 X");
         }
     }
 
