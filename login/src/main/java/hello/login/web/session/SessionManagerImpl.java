@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Component  // 스프링 빈으로 등록
+
 public class SessionManagerImpl implements SessionManager {
 
     public static final String SESSION_COOKIE_NAME="mySessionId";
