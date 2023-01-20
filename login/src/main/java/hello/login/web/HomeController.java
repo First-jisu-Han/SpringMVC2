@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -24,8 +25,6 @@ public class HomeController {
     @Autowired
     MemberRepository memberRepository;
 
-    @Autowired
-    SessionManager sessionManager;
 
 
 
@@ -62,39 +61,42 @@ public class HomeController {
         model.addAttribute ("member",member);
         return "loginHome";
      */
-
+    /*
     @GetMapping("/")
-    public String homeLoginV3(HttpServletRequest request, Model model){
+    public String homeLoginV3(HttpServletRequest request, Model model) {
 
         // 로그인 안한 이에게 세션이 부여되면 안되기때문에 false 처리 (세션 유무만 확인함)
         HttpSession session = request.getSession(false);
 
         // 세션 없으면 home.html로
-        if(session==null){
+        if (session == null) {
             return "home";
         }
 
         // 세션 있으면 세션이 부여된 회원데이터를 꺼냄
-        Member loginMember=(Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
+        Member loginMember = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
 
         // 세션에 회원데이터 없으면 home.html 로 이동
-        if(loginMember==null){
+        if (loginMember == null) {
             return "home";
         }
 
         // 세션이 유지되면 loginHome 으로 이동
-        model.addAttribute ("member",loginMember);
+        model.addAttribute("member", loginMember);
         return "loginHome";
+    }
+    */
+        @GetMapping("/")
+    public String homeLoginV4(@SessionAttribute(name=SessionConst.LOGIN_MEMBER,required = false)Member loginMember,Model model ) {
 
+            // 세션 정보가 null이면
+            if (loginMember == null) {
+                return "home";
+            }
 
-
-
-
-
-
-
-
-
+            // 세션정보가 있다면 해당 객체 model에 넣고 다른 화면으로 이동
+            model.addAttribute("member", loginMember);
+            return "loginHome";
 
     }
 }
