@@ -13,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.Filter;
 import java.util.List;
 
 @Slf4j
@@ -53,6 +54,7 @@ public class ItemController {
                 bindingResult.reject("totalPriceMin", new Object[]{10000, resultPrice}, null);
             }
         }
+
 
         if (bindingResult.hasErrors()) {
             log.info("errors={}", bindingResult);
