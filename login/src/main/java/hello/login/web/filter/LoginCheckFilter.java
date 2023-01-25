@@ -38,7 +38,6 @@ public class LoginCheckFilter implements Filter {
                 }
             }
             chain.doFilter(request,response);
-
         } catch(Exception e) {
             throw e;
         } finally{
